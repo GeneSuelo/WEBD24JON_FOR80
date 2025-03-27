@@ -57,7 +57,14 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             /// 
-            
+            [Display(Name ="User Picture")]
+            public byte[] Picture { get; set; }
+
+            [Required]
+            [StringLength(30, 
+                ErrorMessage ="The {0} must be at least {2} and at max {1} characters long.", 
+                MinimumLength =6)]
+            [Display(Name ="Full Name")]
             public string FullName { get; set; }
 
             [Phone]
@@ -69,12 +76,16 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var fullName = user.FullName;
+            var Picture = user.Picture;
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FullName = fullName,
+                Picture = Picture
             };
         }
 
@@ -103,7 +114,22 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account.Manag
                 await LoadAsync(user);
                 return Page();
             }
-
+            var fullName = user.FullName;
+            if (Input.FullName != fullName)
+            {
+                user.FullName = Input.FullName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Request.Form.Files.Count > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.Picture = dataStream.ToArray();
+                }
+                await _userManager.UpdateAsync(user);
+            }
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
