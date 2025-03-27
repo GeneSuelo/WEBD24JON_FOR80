@@ -77,7 +77,7 @@ namespace CustomI.Sample.CustomUserManagement.Areas.Identity.Pages.Account
             [Display(Name = "Full Name")]
             public string FullName { get; set; }
             
-            ///[Display(Name = "User Picture")]
+            [Display(Name = "User Picture")]
             public byte[] Picture { get; set; }
 
             /// <summary>
