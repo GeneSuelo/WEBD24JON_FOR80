@@ -1,4 +1,5 @@
 using Northwind.Blazor.Components;
+using Northwind.Blazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
 
 builder.Services.AddNorthwindContext();
+builder.Services.AddTransient<INorthwindService, NorthwindServiceServerSide>();
 
 var app = builder.Build();
 
