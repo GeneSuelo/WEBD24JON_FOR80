@@ -1,0 +1,26 @@
+﻿<EditForm Model="@Customer" @*OnValidSubmit="@OnValidSubmit*@>
+    <div class="form-group">
+        <div>
+            <label>Company Name</label>
+            <div>
+                <InputText @bind-Value="@Customer.CompanyName"></InputText>
+                <ValidationMessage For="@(() =>Customer.CompanyName)"></ValidationMessage>
+            </div>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-@ButtonStyle">
+
+    </button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Customer Customer { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<Customer> OnValidSubmit { get; set; }
+
+    [Parameter]
+    public string ButtonStyle { get; set; } = "";
+}
