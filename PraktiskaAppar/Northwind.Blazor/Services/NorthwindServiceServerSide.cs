@@ -1,36 +1,57 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Northwind.Blazor.Services
 {
     public class NorthwindServiceServerSide : INorthwindService
     {
+        private readonly NorthwindDatabaseContext _db;
+        public NorthwindServiceServerSide(NorthwindDatabaseContext db)
+        {
+            _db = db;
+        }
         public Task<Customer> CreateCustomerAsync(Customer c)
         {
-            throw new NotImplementedException();
+            _db.Customers.Add(c);
+            _db.SaveChangesAsync();
+            return Task.FromResult(c);
         }
 
         public Task DeleteCustomerAsync(string id)
         {
-            throw new NotImplementedException();
+            Customer? customer = _db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id).Result;
+
+            if (customer == null)
+            {
+                return Task.CompletedTask;
+            }
+            else
+            {
+                _db.Customers.Remove(customer);
+                return _db.SaveChangesAsync();
+            }
         }
 
         public Task<Customer?> GetCustomerAsync(string id)
         {
-            throw new NotImplementedException();
+            return _db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
         }
 
         public Task<List<Customer>> GetCustomersAsync()
         {
-            throw new NotImplementedException();
+            return _db.Customers.ToListAsync();
         }
 
         public Task<List<Customer>> GetCustomersAsync(string country)
         {
-            throw new NotImplementedException();
+            return _db.Customers.Where(c => c.Country == country).ToListAsync();
         }
 
         public Task<Customer> UpdateCustomerAsync(Customer c)
         {
-            throw new NotImplementedException();
+            _db.Entry(c).State = EntityState.Modified;
+            _db.SaveChangesAsync();
+            return Task.FromResult(c);
         }
     }
 }
