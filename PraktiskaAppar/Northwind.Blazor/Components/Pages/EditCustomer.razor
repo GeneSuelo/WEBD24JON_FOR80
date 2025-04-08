@@ -3,10 +3,9 @@
 @inject NavigationManager _navigation
 
 <h3>EditCustomer</h3>
-@*Skapa komponent/page för att redigera customer, andvänd komponent CustomerDetail*@
 <CustomerDetail ButtonText="Update"
-Customer="@customer"
-OnValidSubmit="@Update"/>
+                Customer="@customer"
+                OnValidSubmit="@Update"/>
 
 @code {
     [Parameter]
