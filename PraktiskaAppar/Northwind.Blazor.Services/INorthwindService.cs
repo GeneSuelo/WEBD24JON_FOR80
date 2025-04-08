@@ -10,5 +10,6 @@ namespace Northwind.Blazor.Services
         Task<Customer> CreateCustomerAsync(Customer c);
         Task<Customer> UpdateCustomerAsync(Customer c);
         Task DeleteCustomerAsync(string id);
+        List<string> GetCountries();
     }
 }

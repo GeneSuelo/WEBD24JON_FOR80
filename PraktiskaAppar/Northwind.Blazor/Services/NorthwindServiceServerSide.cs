@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Northwind.Blazor.Services
 {
@@ -53,5 +54,12 @@ namespace Northwind.Blazor.Services
             _db.SaveChangesAsync();
             return Task.FromResult(c);
         }
+
+        public List<string?> GetCountries()
+        {
+            return _db.Customers.Select(c => c.Country)
+            .Distinct().OrderBy(country => country).ToList();
+        }
+
     }
 }
