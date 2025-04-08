@@ -22,7 +22,6 @@ public partial class Customer
     [StringLength(40)]
     public string CompanyName { get; set; } = null!;
     
-    [Required]
     [StringLength(30)]
     public string? ContactName { get; set; }
 

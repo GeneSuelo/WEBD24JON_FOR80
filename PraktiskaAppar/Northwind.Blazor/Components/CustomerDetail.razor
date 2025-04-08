@@ -1,41 +1,33 @@
 ﻿<EditForm Model="@Customer" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
-  <div class="form-group">
     <div>
-      <label>Customer Id</label>
-      <div>
-        <InputText @bind-Value="@Customer.CustomerId" />
-        <ValidationMessage For="@(() => Customer.CustomerId)" />
-      </div>
+        <label class="form-label">Customer Id</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Customer.CustomerId" />
+            <ValidationMessage For="@(() => Customer.CustomerId)" />
+        </div>
     </div>
-  </div>
-  <div class="form-group ">
     <div>
-      <label>Company Name</label>
-      <div>
-        <InputText @bind-Value="@Customer.CompanyName" />
-        <ValidationMessage For="@(() => Customer.CompanyName)" />
-      </div>
+        <label class="form-label">Company Name</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Customer.CompanyName" />
+            <ValidationMessage For="@(() => Customer.CompanyName)" />
+        </div>
     </div>
-  </div>
-  <div class="form-group ">
     <div>
-      <label>Address</label>
-      <div>
-        <InputText @bind-Value="@Customer.Address" />
-        <ValidationMessage For="@(() => Customer.Address)" />
-      </div>
+        <label class="form-label">Address</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Customer.Address" />
+            <ValidationMessage For="@(() => Customer.Address)" />
+        </div>
     </div>
-    </div>
-  <div class="form-group ">
     <div>
-      <label>Country</label>
-       <div>
-         <InputText @bind-Value="@Customer.Country" />
-         <ValidationMessage For="@(() => Customer.Country)" />
-       </div>
+        <label class="form-label">Country</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@Customer.Country" />
+            <ValidationMessage For="@(() => Customer.Country)" />
+        </div>
     </div>
-  </div>
     <button type="submit" class="btn btn-@ButtonStyle">
         @ButtonText
     </button>
