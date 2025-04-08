@@ -1,0 +1,30 @@
+﻿@page "/editcustomer/{customerid}"
+@inject INorthwindService _service
+@inject NavigationManager _navigation
+
+<h3>EditCustomer</h3>
+@*Skapa komponent/page för att redigera customer, andvänd komponent CustomerDetail*@
+<CustomerDetail ButtonText="Update"
+Customer="@customer"
+OnValidSubmit="@Update"/>
+
+@code {
+    [Parameter]
+    public string CustomerID { get; set; } = null!;
+
+    private Customer? customer = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await _service.GetCustomerAsync(CustomerID);
+    }
+
+    private async Task Update()
+    {
+        if(customer is not null)
+        {
+            await _service.UpdateCustomerAsync(customer);
+        }
+        _navigation.NavigateTo("customers");
+    }
+}
