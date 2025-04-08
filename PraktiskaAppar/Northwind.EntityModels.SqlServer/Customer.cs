@@ -18,9 +18,11 @@ public partial class Customer
     [RegularExpression("[A-Z]{5}")]
     public string CustomerId { get; set; } = null!;
 
+    [Required]
     [StringLength(40)]
     public string CompanyName { get; set; } = null!;
-
+    
+    [Required]
     [StringLength(30)]
     public string? ContactName { get; set; }
 
@@ -39,6 +41,7 @@ public partial class Customer
     [StringLength(10)]
     public string? PostalCode { get; set; }
 
+    [Required]
     [StringLength(15)]
     public string? Country { get; set; }
 
