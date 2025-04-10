@@ -126,3 +126,5 @@ namespace Northwind.WebApi.Controllers
 
     }
 }
+
+// Accepted - 202 - används med POST - för att skapa ett resurs som kan skapas snabbt. 
