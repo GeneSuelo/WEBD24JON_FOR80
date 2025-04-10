@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Northwind.EntityModels; //AddNorthwindContext
 using Microsoft.Extensions.Caching.Memory; // För att använda IMemoryCache
 using Northwind.WebApi.Repositories; // För att använda ICustomerRepository
+using Swashbuckle.AspNetCore.SwaggerUI; // För att anvädna SubmitMethod
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,8 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -41,6 +44,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json",
+            "Northwind Service API Version 1");
+        c.SupportedSubmitMethods(new[]
+        {
+            SubmitMethod.Get, SubmitMethod.Post,
+            SubmitMethod.Put, SubmitMethod.Delete });
+    });
 }
 
 app.UseHttpsRedirection();
