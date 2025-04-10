@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Northwind.EntityModels; //AddNorthwindContext
 using Microsoft.Extensions.Caching.Memory; // För att använda IMemoryCache
+using Northwind.WebApi.Repositories; // För att använda ICustomerRepository
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddSingleton<IMemoryCache>(
     new MemoryCache(new MemoryCacheOptions())); //Lägg till IMemoryCache
 // Add services to the container.
 builder.Services.AddNorthwindContext();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddControllers(options =>
 {
