@@ -1,10 +1,11 @@
-﻿@Northwind.WebApi_HostAddress = https://localhost:5151
+﻿###Configure a variable for the webservice base address
+@Northwind.WebApi_HostAddress = https://localhost:5151
 
 POST {{Northwind.WebApi_HostAddress}}/api/customers
 Content-Type: application/json
 
 {
-  "customerID": "ABCXY",
+  "customerID": "ABDXY",
   "companyName": "ABC Corp",
   "contactName": "John Smith",
   "contactTitle": "Sir",
