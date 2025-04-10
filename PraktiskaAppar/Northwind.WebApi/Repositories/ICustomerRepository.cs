@@ -8,6 +8,6 @@ namespace Northwind.WebApi.Repositories
         Task<Customer[]> RetrieveAllAsync();
         Task<Customer?> RetrieveAsync(string id);
         Task<Customer?> UpdateAsync(Customer c);
-        Task<bool> DeleteAsync(string id);
+        Task<bool?> DeleteAsync(string id);
     }
 }
