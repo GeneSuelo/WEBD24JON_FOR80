@@ -30,9 +30,7 @@ builder.Services.AddControllers(options =>
         }
     }
 }
-)
-    .AddXmlDataContractSerializerFormatters() 
-    .AddXmlSerializerFormatters();//Lägg till XML formatter
+); //Använder JSON som standart, så ingen extra konfiguration behövs här
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
